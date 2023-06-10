@@ -165,10 +165,6 @@ func (a Point3D) Dot(b Point3D) float64 {
 	return a.X*b.X + a.Y*b.Y + a.Z*b.Z
 }
 
-func (a Point3D) Lenght() float64 {
-	return math.Sqrt(a.Dot(a))
-}
-
 func (p Point3D) Distance(a Point3D) float64 {
 	return math.Sqrt(math.Pow((p.X-a.X), 2) + math.Pow((p.Y-a.Y), 2) + math.Pow((p.Z-a.Z), 2))
 }
