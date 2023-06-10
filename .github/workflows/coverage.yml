@@ -19,3 +19,13 @@ jobs:
         with:
           # Configure action using config file (option 1)
           config: ./.testcoverage.yml
+      - name: make coverage badge
+        uses: action-badges/core@0.2.2
+        if: contains(github.ref, 'main')
+        with:
+          label: coverage
+          message: ${{ steps.coverage.outputs.badge-text }}
+          message-color: ${{ steps.coverage.outputs.badge-color }}
+          file-name: coverage.svg
+          badge-branch: badges ## orphan branch where badge will be committed
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
