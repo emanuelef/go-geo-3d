@@ -1,3 +1,3 @@
 module github.com/emanuelef/go-geo-3d
 
-go 1.20
+go 1.18
