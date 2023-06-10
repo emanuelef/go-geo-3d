@@ -31,6 +31,13 @@ type Coord4D struct {
 	Timestamp int64 `json:"timestamp"`
 }
 
+func NewCoord3d(lat, lon, alt float64) Coord3D {
+	return Coord3D{
+		Coord2D: Coord2D{Lat: lat, Lon: lon},
+		Alt:     alt,
+	}
+}
+
 func hsin(theta float64) float64 {
 	return math.Pow(math.Sin(theta/2), 2)
 }
