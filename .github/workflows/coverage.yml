@@ -17,7 +17,11 @@ jobs:
       - name: check test coverage
         uses: vladopajic/go-test-coverage@v2
         with:
-          config: ./.github/.testcoverage.yml
+          profile: cover.out
+          local-prefix: github.com/org/project
+          threshold-file: 10
+          threshold-package: 10
+          threshold-total: 15
 
       - name: make coverage badge
         uses: action-badges/core@0.2.2
