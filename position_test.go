@@ -88,6 +88,30 @@ func TestMin3DDistanceH(t *testing.T) {
 	}
 }
 
+func TestClosestPointOnLineEdgeA(t *testing.T) {
+	start := NewCoord3d(51.39674, -0.36148, 1104.9)
+	end := NewCoord3d(51.38463, -0.36819, 1219.2)
+	posA := NewCoord3d(51.39674, -0.36148, 15)
+
+	minPoint, _ := posA.ClosestPointOnLine(start, end)
+	distance := Distance3D(posA, minPoint)
+	if int(distance) != 1089 {
+		t.Errorf("Computed values: %10f\n", distance)
+	}
+}
+
+func TestClosestPointOnLineEdgeB(t *testing.T) {
+	start := NewCoord3d(51.39674, -0.36148, 1104.9)
+	end := NewCoord3d(51.38463, -0.36819, 1219.2)
+	posA := NewCoord3d(51.38463, -0.36899, 1200.0)
+
+	minPoint, _ := posA.ClosestPointOnLine(start, end)
+	distance := Distance3D(posA, minPoint)
+	if int(distance) != 58 {
+		t.Errorf("Computed values: %10f\n", distance)
+	}
+}
+
 func TestClosestPointOnLineWithTimestamp(t *testing.T) {
 	start := NewCoord4d(51.39674, -0.36148, 1104.9, 1686427146)
 	end := NewCoord4d(51.38463, -0.36819, 1219.2, 1686427276)
@@ -97,5 +121,27 @@ func TestClosestPointOnLineWithTimestamp(t *testing.T) {
 
 	if int(minPoint.Timestamp) != 1686427262 {
 		t.Errorf("Computed value: %df\n", minPoint.Timestamp)
+	}
+}
+
+func TestClosestPointOnLineWithTimestampEdgeA(t *testing.T) {
+	start := NewCoord4d(51.39674, -0.36148, 1104.9, 1686427146)
+	end := NewCoord4d(51.38463, -0.36819, 1219.2, 1686427276)
+	posA := NewCoord3d(51.39674, -0.36148, 15)
+
+	minPoint, _ := posA.ClosestPointOnLineWithTimestamp(start, end)
+	if int(minPoint.Timestamp) != 1686427146 {
+		t.Errorf("Computed value: %d\n", minPoint.Timestamp)
+	}
+}
+
+func TestClosestPointOnLineWithTimestampEdgeB(t *testing.T) {
+	start := NewCoord4d(51.39674, -0.36148, 1104.9, 1686427146)
+	end := NewCoord4d(51.38463, -0.36819, 1219.2, 1686427276)
+	posA := NewCoord3d(51.38463, -0.36899, 1200.0)
+
+	minPoint, _ := posA.ClosestPointOnLineWithTimestamp(start, end)
+	if int(minPoint.Timestamp) != 1686427276 {
+		t.Errorf("Computed values: %d\n", minPoint.Timestamp)
 	}
 }
