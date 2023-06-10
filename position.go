@@ -38,6 +38,13 @@ func NewCoord3d(lat, lon, alt float64) Coord3D {
 	}
 }
 
+func NewCoord4d(lat, lon, alt float64, timestamp int64) Coord4D {
+	return Coord4D{
+		Coord3D:   NewCoord3d(lat, lon, alt),
+		Timestamp: timestamp,
+	}
+}
+
 func hsin(theta float64) float64 {
 	return math.Pow(math.Sin(theta/2), 2)
 }

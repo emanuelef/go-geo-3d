@@ -5,6 +5,18 @@ import (
 	"testing"
 )
 
+func TestConstructor(t *testing.T) {
+	start := NewCoord3d(51.39674, -0.36148, 1104.9)
+	end := NewCoord3d(51.38463, -0.36819, 1219.2)
+	posA := NewCoord3d(51.3909, -0.364, 15)
+
+	minPoint, _ := posA.ClosestPointOnLine(start, end)
+	distance := Distance3D(posA, minPoint)
+	if int(distance) != 1140 {
+		t.Errorf("Computed values: %10f\n", distance)
+	}
+}
+
 func TestMin3DDistance(t *testing.T) {
 	// 619.3074816643333
 	start := Coord3D{Coord2D: Coord2D{51.4142, -0.3519439}, Alt: 883.92}
@@ -73,5 +85,17 @@ func TestMin3DDistanceH(t *testing.T) {
 	if int(meters) != int(distance) {
 		t.Errorf("Computed values: %10f\n", meters)
 		t.Errorf("Incorrect computation between A and B: %v\n", meters)
+	}
+}
+
+func TestClosestPointOnLineWithTimestamp(t *testing.T) {
+	start := NewCoord4d(51.39674, -0.36148, 1104.9, 1686427146)
+	end := NewCoord4d(51.38463, -0.36819, 1219.2, 1686427276)
+	posA := NewCoord3d(51.3909, -0.364, 15)
+
+	minPoint, _ := posA.ClosestPointOnLineWithTimestamp(start, end)
+
+	if int(minPoint.Timestamp) != 1686427262 {
+		t.Errorf("Computed value: %df\n", minPoint.Timestamp)
 	}
 }
