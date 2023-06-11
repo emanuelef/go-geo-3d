@@ -61,10 +61,6 @@ func HaversineDistance(p1, p2 Coord2D) float64 {
 	return meters
 }
 
-func EuclideanDistance(a, b float64) float64 {
-	return (math.Sqrt(math.Pow(a, 2) + math.Pow(b, 2)))
-}
-
 func Distance3D(a, b Coord3D) float64 {
 	distance2d := HaversineDistance(a.Coord2D, b.Coord2D)
 	return EuclideanDistance(distance2d, a.Alt-b.Alt)
@@ -81,10 +77,6 @@ func MinDistancePointToLine3D(startPosition, endPosition, posA Coord3D) float64 
 	Area := math.Sqrt(p * (p - AB) * (p - BC) * (p - AC))
 
 	return (2 * Area) / AB
-}
-
-func RadiansToDegrees(radians float64) float64 {
-	return radians * (180.0 / math.Pi)
 }
 
 // Implemented formula in https://gamedev.stackexchange.com/a/72529
