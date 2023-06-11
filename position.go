@@ -22,10 +22,6 @@ type Coord3D struct {
 	Alt float64 `json:"alt"`
 }
 
-type Point3D struct {
-	X, Y, Z float64
-}
-
 type Coord4D struct {
 	Coord3D
 	Timestamp int64 `json:"timestamp"`
@@ -86,6 +82,7 @@ func MinDistancePointToLine3D(startPosition, endPosition, posA Coord3D) float64 
 	return (2 * Area) / AB
 }
 
+// ported from Python: https://stackoverflow.com/a/69604627/1077888
 func LatLonAltToXYZWgs84(pos Coord3D) Point3D {
 	a := WGS84_a // radius a of earth in meters cfr WGS84
 	b := WGS84_b // radius b of earth in meters cfr WGS84
@@ -107,6 +104,7 @@ func RadiansToDegrees(radians float64) float64 {
 	return radians * (180.0 / math.Pi)
 }
 
+// ported from Python: https://stackoverflow.com/a/67078296/1077888
 func XYZWgs84ToLatLon(point Point3D) Coord3D {
 	a := WGS84_a // in meters
 	b := WGS84_b // in meters
@@ -137,38 +135,7 @@ func XYZWgs84ToLatLon(point Point3D) Coord3D {
 	return Coord3D{Coord2D: Coord2D{lat, lon}, Alt: h}
 }
 
-func (a Point3D) Add(b Point3D) Point3D {
-	return Point3D{
-		X: a.X + b.X,
-		Y: a.Y + b.Y,
-		Z: a.Z + b.Z,
-	}
-}
-
-func (a Point3D) Sub(b Point3D) Point3D {
-	return Point3D{
-		X: a.X - b.X,
-		Y: a.Y - b.Y,
-		Z: a.Z - b.Z,
-	}
-}
-
-func (a Point3D) MultiplyByScalar(s float64) Point3D {
-	return Point3D{
-		X: a.X * s,
-		Y: a.Y * s,
-		Z: a.Z * s,
-	}
-}
-
-func (a Point3D) Dot(b Point3D) float64 {
-	return a.X*b.X + a.Y*b.Y + a.Z*b.Z
-}
-
-func (p Point3D) Distance(a Point3D) float64 {
-	return math.Sqrt(math.Pow((p.X-a.X), 2) + math.Pow((p.Y-a.Y), 2) + math.Pow((p.Z-a.Z), 2))
-}
-
+// https://gamedev.stackexchange.com/a/72529
 func (p Coord3D) ClosestPointOnLine(a, b Coord3D) (Coord3D, error) {
 	A := LatLonAltToXYZWgs84(a)
 	B := LatLonAltToXYZWgs84(b)
