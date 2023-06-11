@@ -7,13 +7,19 @@ import (
 )
 
 func main() {
+	// Coordinates are in degrees and altitude in metres
 	start := geo.NewCoord3d(51.39674, -0.36148, 1104.9)
 	end := geo.NewCoord3d(51.38463, -0.36819, 1219.2)
+
+	// Distance in metres between two 3D coordinates
+	distance := geo.Distance3D(start, end)
+
+	fmt.Printf("Distance 3D line from start to end: %.3fm\n", distance)
+
 	posA := geo.NewCoord3d(51.3909, -0.364, 15)
-
-	meters := geo.MinDistancePointToLine3D(start, end, posA)
+	// Minimum distance in metres from one 3D point to a project line in 3D coordinates
 	minPoint, _ := posA.ClosestPointOnLine(start, end)
-	distance := geo.Distance3D(posA, minPoint)
+	distance = geo.Distance3D(posA, minPoint)
 
-	fmt.Printf("Distance: %.3f m %.3f m\n", meters, distance)
+	fmt.Printf("Distance from one point to a line: %.3fm\n", distance)
 }
