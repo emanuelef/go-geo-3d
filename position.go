@@ -102,7 +102,7 @@ func (p Coord3D) ClosestPointOnLine(a, b Coord3D) (Coord3D, error) {
 
 	res := A.Add(AB.MultiplyByScalar(scalar))
 
-	// convert back to geographic coordinates from Cartesian
+	// convert back to geographic coordinates from the cartesian ones
 	return XYZWgs84ToLatLon(res), nil
 }
 
