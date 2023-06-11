@@ -7,7 +7,7 @@
 
 ----
 
-go-geo-3d is a module with zero dependencies to calculate distances of geo-spacial points.
+go-geo-3d is a module with zero dependencies to calculate distances of 3d geospatial points.
 
 ## Installation
 ```bash
