@@ -135,8 +135,9 @@ func XYZWgs84ToLatLon(point Point3D) Coord3D {
 	return Coord3D{Coord2D: Coord2D{lat, lon}, Alt: h}
 }
 
-// https://gamedev.stackexchange.com/a/72529
+// Implemented formula in https://gamedev.stackexchange.com/a/72529
 func (p Coord3D) ClosestPointOnLine(a, b Coord3D) (Coord3D, error) {
+	// convert from geographic coordinates to Cartesian
 	A := LatLonAltToXYZWgs84(a)
 	B := LatLonAltToXYZWgs84(b)
 	P := LatLonAltToXYZWgs84(p)
@@ -153,11 +154,11 @@ func (p Coord3D) ClosestPointOnLine(a, b Coord3D) (Coord3D, error) {
 		} else {
 			return b, nil
 		}
-		// return Coord3D{}, errors.New("Point not on the segment")
 	}
 
 	res := A.Add(AB.MultiplyByScalar(scalar))
 
+	// convert back to geographic coordinates from Cartesian
 	return XYZWgs84ToLatLon(res), nil
 }
 
