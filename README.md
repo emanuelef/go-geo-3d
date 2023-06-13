@@ -38,7 +38,7 @@ func main() {
 	posA := geo.NewCoord3d(51.3909, -0.364, 15)
 	// Minimum distance in metres from one 3D point to a project line in 3D coordinates
 	minPoint, _ := posA.ClosestPointOnLine(start, end)
-    // Lat: 51.39181 Lon: -0.36421 Alt: 1151.37514
+        // Lat: 51.39181 Lon: -0.36421 Alt: 1151.37514
 
 	distance = geo.Distance3D(posA, minPoint)
 
