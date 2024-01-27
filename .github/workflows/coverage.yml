@@ -27,7 +27,7 @@ jobs:
           threshold-total: 0
 
       - name: make coverage badge
-        uses: action-badges/core@0.2.2
+        uses: action-badges/core@0.3.0
         if: contains(github.ref, 'main')
         with:
           label: coverage
